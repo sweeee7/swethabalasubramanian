@@ -1,4 +1,4 @@
-# Swetha Balasubramanian | Aerospace portfolio
+# Swetha Balasubramanian 
 
 A static portfolio site (plain HTML, CSS and JS, no build step) for GitHub Pages.
 
