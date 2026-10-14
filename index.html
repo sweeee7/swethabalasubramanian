@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Portfolio of Swetha Balasubramanian, aerospace engineer: design, structural analysis and CFD.">
+<title>Swetha Balasubramanian | Aerospace portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;600;700&family=Caveat:wght@600&display=swap">
+<style>
+/* Layout concept: a soft pink and light-blue portfolio. A flow-simulation cover, rounded cards, sparkle accents. */
+:root {
+  --bg: #FFF7FB; --surface: #FFFFFF; --fg: #2E2750; --muted: #6E6490; --line: #F4D3E3;
+  --accent: #C93C86; --accent-soft: #FDE3F0; --blue: #2C84C4; --blue-soft: #E1F2FD;
+  --warn: #B0366F; --warn-soft: #FDE3F0; --edge: #F0B9D3;
+  --font-display: "Fraunces", Georgia, serif; --font-body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Nunito", system-ui, sans-serif; --font-script: "Caveat", cursive;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1A1530; --surface: #241D42; --fg: #F6E9F1; --muted: #BBAFD6; --line: #3F3466;
+    --accent: #FF8CC2; --accent-soft: #3A2350; --blue: #8CCBFA; --blue-soft: #1D3350;
+    --warn: #FFB3D5; --warn-soft: #3A2350; --edge: #5A3F7E; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1A1530; --surface: #241D42; --fg: #F6E9F1; --muted: #BBAFD6; --line: #3F3466;
+  --accent: #FF8CC2; --accent-soft: #3A2350; --blue: #8CCBFA; --blue-soft: #1D3350;
+  --warn: #FFB3D5; --warn-soft: #3A2350; --edge: #5A3F7E; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: auto; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+  padding-block: 0 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.sheet { max-width: 1040px; margin-inline: auto; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.05; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.9rem, 8.4vw, 5.25rem); font-weight: 700; text-transform: uppercase; }
+h2 { font-size: 1.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+h3 { font-size: 1.4rem; letter-spacing: 0.01em; }
+p { margin: 0; }
+.label { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.val { font-family: var(--font-mono); font-size: 0.88rem; overflow-wrap: anywhere; }
+.meta { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); letter-spacing: 0.04em; }
+
+/* Top bar */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--bg); border-bottom: 1.5px solid var(--fg);
+  margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px));
+}
+.top-in { max-width: 1040px; margin-inline: auto; display: flex; justify-content: space-between; align-items: baseline; gap: 12px 24px; flex-wrap: wrap; padding-block: 12px; }
+.brand { font-family: var(--font-display); font-weight: 700; font-size: 1.35rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--fg); text-decoration: none; }
+.top nav { display: flex; gap: 20px; flex-wrap: wrap; }
+.top nav a { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-block: 4px; border-bottom: 1.5px solid transparent; }
+.top nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+.view { display: grid; gap: 56px; padding-top: 32px; max-width: 1040px; margin-inline: auto; }
+.view.proj { max-width: 860px; gap: 28px; }
+section { display: grid; gap: 24px; scroll-margin-top: 72px; }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; border-bottom: 1.5px solid var(--fg); padding-bottom: 8px; flex-wrap: wrap; }
+
+.titleblock { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border: 1.5px solid var(--fg); background: var(--surface); }
+.titleblock > div { padding: 10px 14px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-width: 0; }
+
+.hero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 32px; align-items: center; }
+.hero-copy { display: grid; gap: 20px; }
+.role { font-family: var(--font-display); font-size: clamp(1.4rem, 3.2vw, 1.9rem); font-weight: 500; color: var(--accent); letter-spacing: 0.02em; }
+.lede { max-width: 60ch; color: var(--muted); }
+.links { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+.btn { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg); background: var(--surface); border: 1px solid var(--fg); padding: 6px 12px; text-decoration: none; cursor: pointer; }
+.btn:hover { background: var(--accent-soft); }
+.airfoil { margin: 0; border: 1px solid var(--line); background: var(--surface); padding: 12px; }
+.airfoil img { width: 100%; height: auto; display: block; background: #fff; }
+.airfoil figcaption { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); padding: 8px 4px 0; letter-spacing: 0.04em; }
+@media (max-width: 760px) { .hero { grid-template-columns: minmax(0, 1fr); } }
+
+.prose { max-width: 72ch; }
+ul.prose { margin: 0; padding-left: 1.2rem; display: grid; gap: 8px; }
+ul.prose li::marker { color: var(--accent); }
+
+.focus { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); border: 1px solid var(--line); }
+.focus > div { padding: 20px; display: grid; gap: 8px; align-content: start; border-right: 1px solid var(--line); background: var(--surface); min-width: 0; }
+.focus > div:last-child { border-right: 0; }
+.focus p { color: var(--muted); font-size: 0.95rem; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); padding: 2px 8px; }
+
+/* Project list */
+.plist { display: grid; border-top: 1px solid var(--line); }
+.plist.also { border-top: 0; margin-top: -8px; }
+.plink { display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 20px; align-items: baseline; padding: 16px 8px; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--fg); }
+.plink:not(.static):hover { background: var(--surface); }
+.plink:not(.static):hover .pl-go { color: var(--accent); transform: translateX(3px); }
+.pl-date { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); }
+.pl-main { display: grid; gap: 2px; min-width: 0; }
+.pl-title { font-family: var(--font-display); font-weight: 600; font-size: 1.45rem; line-height: 1.15; }
+.pl-tools { font-size: 0.9rem; color: var(--muted); }
+.pl-go { font-family: var(--font-mono); color: var(--muted); transition: transform 0.15s; }
+.plink.static .pl-title { font-size: 1.2rem; }
+@media (max-width: 600px) { .plink { grid-template-columns: minmax(0, 1fr) auto; } .pl-date { grid-column: 1 / -1; } }
+@media (prefers-reduced-motion: reduce) { .pl-go { transition: none; } }
+
+.rows { display: grid; border-top: 1px solid var(--line); }
+.rows > div { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+@media (max-width: 600px) { .rows > div { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+.when { font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); padding-top: 4px; }
+.rows h3 { font-size: 1.3rem; }
+.rows p { color: var(--muted); font-size: 0.95rem; }
+
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+.skills > div { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--font-mono); font-size: 0.78rem; padding: 3px 9px; border: 1px solid var(--line); background: var(--surface); }
+
+.contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); border: 1.5px solid var(--fg); background: var(--surface); }
+.contact > div { padding: 14px 16px; border-right: 1px solid var(--line); min-width: 0; display: grid; gap: 4px; }
+
+/* Case study pages */
+.pn { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; padding-block: 8px; border-block: 1px solid var(--line); }
+.pn a { text-decoration: none; }
+.pn a:hover { text-decoration: underline; }
+.pn .off { color: var(--line); }
+.phead { display: grid; gap: 14px; padding-top: 12px; }
+.phead h1 { font-size: clamp(2.3rem, 6vw, 3.6rem); }
+.metablock { display: grid; margin: 0; border-top: 1.5px solid var(--fg); }
+.metablock > div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.metablock dt { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.metablock dd { margin: 0; font-size: 0.95rem; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); border: 1px solid var(--line); background: var(--surface); }
+.stats > div { padding: 16px 18px; border-right: 1px solid var(--line); display: grid; gap: 4px; align-content: start; min-width: 0; }
+.stats > div:last-child { border-right: 0; }
+.big { font-family: var(--font-display); font-weight: 700; font-size: 2.4rem; line-height: 1; color: var(--accent); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.stats .cap { font-size: 0.88rem; color: var(--muted); }
+.view.proj h2 { font-size: 1.5rem; padding-top: 12px; border-top: 1px solid var(--line); }
+
+.fimg { margin: 0; display: grid; gap: 6px; }
+.fimg img { max-width: 100%; height: auto; display: block; border: 1px solid var(--line); background: #fff; }
+.fimg.narrow img { max-width: 360px; }
+.fimg figcaption { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.03em; max-width: 72ch; }
+
+.tbl { display: grid; gap: 6px; }
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--line); }
+table { border-collapse: collapse; width: 100%; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tbody tr:last-child td { border-bottom: 0; }
+th { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface); white-space: nowrap; }
+
+/* Widgets */
+.widget { display: grid; gap: 16px; border: 1.5px solid var(--fg); background: var(--surface); padding: 20px; }
+.wnote { font-size: 0.86rem; color: var(--muted); }
+.wcontrols { display: flex; flex-wrap: wrap; gap: 16px 28px; }
+.wgroup { display: grid; gap: 6px; }
+.seg { display: flex; flex-wrap: wrap; }
+.seg button { font-family: var(--font-mono); font-size: 0.8rem; color: var(--fg); background: var(--bg); border: 1px solid var(--fg); margin-left: -1px; padding: 6px 12px; cursor: pointer; }
+.seg button:first-child { margin-left: 0; }
+.seg button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.bars { display: grid; gap: 10px; }
+.bar-row { display: grid; grid-template-columns: 84px minmax(0, 1fr) 90px; gap: 12px; align-items: center; }
+.bar { height: 14px; background: var(--bg); border: 1px solid var(--line); }
+.fill { height: 100%; background: var(--accent); width: 0; transition: width 0.25s; }
+.bar-row:last-child .fill { background: var(--fg); }
+@media (prefers-reduced-motion: reduce) { .fill { transition: none; } }
+.bar-row .val { text-align: right; font-variant-numeric: tabular-nums; }
+.delta { font-family: var(--font-display); font-weight: 600; font-size: 1.7rem; line-height: 1.2; }
+.delta.down { color: var(--accent); }
+.delta.up { color: var(--warn); }
+.inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+.inputs label { display: grid; gap: 4px; }
+.inputs input { font-family: var(--font-mono); font-size: 0.95rem; color: var(--fg); background: var(--bg); border: 1px solid var(--fg); padding: 7px 10px; width: 100%; min-width: 0; }
+@media (max-width: 480px) { .bar-row { grid-template-columns: 70px minmax(0, 1fr) 76px; } }
+
+.foot { margin-top: 56px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; max-width: 1040px; margin-inline: auto; }
+.hero { grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr); }
+.hero h1 { font-size: clamp(2.3rem, 5.6vw, 4rem); overflow-wrap: anywhere; }
+.airfoil img { max-height: 420px; width: auto; max-width: 100%; margin-inline: auto; }
+.fimg img { max-height: 520px; width: auto; max-width: 100%; }
+@media (max-width: 760px) { .hero { grid-template-columns: minmax(0, 1fr); } }
+
+/* Soft pink and blue styling */
+body { background: radial-gradient(900px 500px at 8% -5%, var(--blue-soft), transparent 60%), radial-gradient(900px 560px at 100% 0%, var(--accent-soft), transparent 55%), var(--bg); background-attachment: fixed; font-family: var(--font-body); }
+h1,h2,h3 { font-family: var(--font-display); letter-spacing: 0; text-transform: none; }
+h1 { font-weight: 600; text-transform: none; }
+h2 { font-size: 1.9rem; text-transform: none; letter-spacing: 0; }
+.view.proj h2 { text-transform: none; font-size: 1.6rem; border-top: 0; padding-top: 6px; }
+.label, .meta, .when, .pl-date, .tag, .btn, .metablock dt, th, .top nav a, .foot, .pn { font-family: var(--font-body); font-weight: 700; }
+.label { letter-spacing: 0.08em; }
+.top { background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1.5px solid var(--edge); }
+.brand { font-family: var(--font-display); text-transform: none; font-size: 1.4rem; letter-spacing: 0; }
+.top nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.section-head { border-bottom: 2px dotted var(--edge); }
+.section-head h2::before, .view.proj h2::before { content: "✦ "; color: var(--accent); font-size: 0.7em; vertical-align: 0.15em; }
+.cover { display: grid; gap: 18px; justify-items: center; text-align: center; padding-top: 8px; }
+.cover h1 { font-size: clamp(2.4rem, 7vw, 4.4rem); }
+.kicker { font-family: var(--font-script); font-size: 1.6rem; color: var(--accent); }
+.cover .role { font-family: var(--font-body); font-weight: 600; font-size: clamp(1.05rem, 2.4vw, 1.3rem); color: var(--blue); }
+.gif { margin: 6px 0 0; width: 100%; max-width: 920px; border: 2px solid var(--edge); border-radius: 28px; background: var(--surface); padding: 12px; box-shadow: 0 14px 40px -18px var(--accent); }
+.gif img { width: 100%; height: auto; display: block; border-radius: 18px; }
+.gif figcaption { font-size: 0.8rem; color: var(--muted); padding: 10px 8px 2px; }
+.cover .lede { max-width: 62ch; }
+.cover .links { justify-content: center; }
+.btn { border-radius: 999px; border: 1.5px solid var(--edge); background: var(--surface); color: var(--fg); letter-spacing: 0.04em; text-transform: none; font-size: 0.85rem; padding: 7px 16px; }
+.btn:hover { background: var(--accent-soft); }
+.btn.pink { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.pink:hover { background: var(--accent); filter: brightness(1.08); }
+.tag { border-radius: 999px; background: var(--blue-soft); color: var(--blue); text-transform: none; letter-spacing: 0.02em; padding: 2px 12px; font-size: 0.78rem; }
+.chip { border-radius: 999px; border-color: var(--edge); background: var(--surface); font-family: var(--font-body); }
+.focus, .stats, .contact, .widget, .tbl-wrap { border-radius: 22px; border: 1.5px solid var(--edge); overflow: hidden; }
+.focus > div, .stats > div, .contact > div { border-color: var(--line); }
+.focus > div:nth-child(odd) { background: var(--blue-soft); }
+.focus > div:nth-child(even) { background: var(--accent-soft); }
+.focus > div { background: var(--surface); }
+.big { font-family: var(--font-display); color: var(--accent); font-weight: 600; }
+.stats > div:nth-child(even) .big { color: var(--blue); }
+.fimg img { border-radius: 16px; border: 1.5px solid var(--edge); }
+.plist { border-top: 2px dotted var(--edge); }
+.plink { border-bottom: 2px dotted var(--edge); border-radius: 14px; }
+.plink:not(.static):hover { background: var(--accent-soft); }
+.pl-date, .when { color: var(--accent); font-size: 0.85rem; }
+.pl-title { font-family: var(--font-display); font-weight: 600; }
+.rows { border-top: 2px dotted var(--edge); } .rows > div { border-bottom: 2px dotted var(--edge); }
+.metablock { border-top: 2px solid var(--edge); } .metablock > div { border-bottom: 1px dashed var(--edge); }
+.pn { border-block: 1.5px dashed var(--edge); text-transform: none; font-size: 0.9rem; }
+.pn .off { color: var(--line); }
+.seg button { border-radius: 999px; border: 1.5px solid var(--edge); margin-left: 6px; font-family: var(--font-body); font-weight: 600; }
+.seg button:first-child { margin-left: 0; }
+.seg button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.bar { border-radius: 999px; overflow: hidden; border-color: var(--edge); } .fill { background: var(--accent); } .bar-row:last-child .fill { background: var(--blue); }
+.inputs input { border-radius: 12px; border: 1.5px solid var(--edge); font-family: var(--font-body); }
+.delta { font-family: var(--font-display); } .delta.down { color: var(--blue); } .delta.up { color: var(--accent); }
+table th { background: var(--blue-soft); }
+.foot { font-family: var(--font-script); font-size: 1rem; letter-spacing: 0; }
+@media (prefers-reduced-motion: reduce) { .gif img { content: none; } }
+</style>
+
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <a class="brand" href="#home">Swetha Balasubramanian</a>
+  <nav aria-label="Sections"><a href="#about">About</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#contact">Contact</a></nav>
+</div></header>
+
+<main class="sheet">
+
+<div class="view" id="view-home">
+  <div class="cover">
+    <p class="kicker">✦ Aerospace portfolio ✦</p>
+    <h1>Swetha Balasubramanian</h1>
+    <p class="role">Aerospace engineer: design, structural analysis, CFD</p>
+    <figure class="gif">
+      <img src="assets/flow.gif" alt="Animated flow simulation: air streaming around the scalloped leading edge of a humpback whale flipper, with swirls forming in the gaps between the tubercles" width="960" height="480">
+      <figcaption>Flow between the tubercles of a humpback whale flipper. An illustrative 2D lattice Boltzmann simulation, not project data. Colour shows swirl direction, pink one way and blue the other.</figcaption>
+    </figure>
+    <p class="lede">MSc Aerospace Dynamics from Cranfield University and a First Class with Distinction B.Tech in Aerospace Engineering. I design and analyse aircraft structures and aerodynamic surfaces, with internships in UAV wing design and CFD, and an MSc thesis on leading-edge tubercles on propeller blades.</p>
+    <div class="links">
+      <span class="val" id="email-text">swethabalasubramanian02@gmail.com</span>
+      <button type="button" class="btn" id="copy-email">Copy email</button>
+      <a class="btn" href="https://www.linkedin.com/in/swetha-bala02" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn pink" href="#projects">See my projects ↓</a>
+    </div>
+  </div>
+
+  <section id="about" aria-labelledby="about-h">
+    <div class="section-head"><h2 id="about-h">About</h2></div>
+    <p class="prose">I am an aerospace engineer with an MSc in Aerospace Dynamics from Cranfield University and a First Class with Distinction B.Tech in Aerospace Engineering from SASTRA University. My work covers aircraft wing and UAV design, structural layout and load estimation, and CFD from low-speed wings to transonic wing-bodies. I am looking for aerospace roles in design, structural analysis and CFD.</p>
+    <div class="focus">
+      <div><h3>Design</h3><p>CAD for aircraft wings, fuselage and UAV components in CATIA and SolidWorks. A 20-seater regional aircraft concept, a carbon fibre sandwich UAV wing, and an E-Baja chassis taken through manufacture.</p></div><div><h3>Structural analysis</h3><p>Wing box layouts with spars, ribs and skins. Shear force, bending moment and torque along the span, shear flow in thin-walled sections, and static and modal FEA in ANSYS.</p></div><div><h3>CFD</h3><p>RANS and DDES in ANSYS Fluent on HPC, from low-speed wings to a transonic wing-body. Mesh convergence studies, validation against wind-tunnel data and aeroacoustics.</p></div>
+    </div>
+  </section>
+
+  <section id="projects" aria-labelledby="proj-h">
+    <div class="section-head"><h2 id="proj-h">Projects</h2><span class="label">Open a project for the full case study</span></div>
+    <div class="plist"><a class="plink" href="#thesis"><span class="pl-date">2024 to 2025</span><span class="pl-main"><span class="pl-title">Leading-edge tubercles on propeller blades</span><span class="pl-tools">ANSYS Fluent, MATLAB, HPC</span></span><span class="pl-go" aria-hidden="true">→</span></a><a class="plink" href="#crm"><span class="pl-date">Mar 2025</span><span class="pl-main"><span class="pl-title">NASA CRM wing-body: transonic turbulence model assessment</span><span class="pl-tools">ANSYS Fluent, Pointwise, HPC</span></span><span class="pl-go" aria-hidden="true">→</span></a><a class="plink" href="#saccon"><span class="pl-date">Final-year project</span><span class="pl-main"><span class="pl-title">SACCON UCAV flying wing: stability and spoilers</span><span class="pl-tools">SolidWorks, ANSYS Fluent</span></span><span class="pl-go" aria-hidden="true">→</span></a><a class="plink" href="#naca0020"><span class="pl-date">May 2023</span><span class="pl-main"><span class="pl-title">NACA 0020 wing with a trailing-edge end plate</span><span class="pl-tools">SolidWorks, ANSYS Gambit and Fluent, Tecplot</span></span><span class="pl-go" aria-hidden="true">→</span></a><a class="plink" href="#transonic"><span class="pl-date">Feb to Apr 2025</span><span class="pl-main"><span class="pl-title">3D transonic wing design</span><span class="pl-tools">ESDU VGKD, VGK, VFP; XFOIL</span></span><span class="pl-go" aria-hidden="true">→</span></a><a class="plink" href="#reynolds"><span class="pl-date">Oct 2025</span><span class="pl-main"><span class="pl-title">Reynolds numbers at cruise</span><span class="pl-tools">ISA tables, hand calculation</span></span><span class="pl-go" aria-hidden="true">→</span></a></div>
+    <div class="plist also"><div class="plink static"><span class="pl-date">2024</span><span class="pl-main"><span class="pl-title">20-seater regional aircraft</span><span class="pl-tools">SASTRA University, team of six led by me. Conceptual and preliminary design in CATIA for about 2,000 kg payload and 800 km range: two-spar, 12-plus-rib wing layout, Schrenk lift distribution, shear force, bending moment and torque, and a weight and CG estimate giving an MTOW of 7 to 8 tonnes.</span></span></div><div class="plink static"><span class="pl-date">Feb to May 2026</span><span class="pl-main"><span class="pl-title">Carbon fibre sandwich UAV wing</span><span class="pl-tools">Vayudhwajai-M Aerospace. Foam-core carbon fibre wing for a fixed-wing UAV: aerofoil selection, geometry, load estimate, and FEA of stress and deformation.</span></span></div><div class="plink static"><span class="pl-date">May 2022 to Apr 2023</span><span class="pl-main"><span class="pl-title">E-Baja chassis</span><span class="pl-tools">SASTRA Racing Team. Chassis and mechanical components in SolidWorks, static and modal FEA, manufacture and physical testing.</span></span></div></div>
+  </section>
+
+  <section id="experience" aria-labelledby="exp-h">
+    <div class="section-head"><h2 id="exp-h">Experience</h2></div>
+    <div class="rows">
+      <div><div class="when">Feb to May 2026</div><div><h3>Aerospace Design Intern</h3><p>Vayudhwajai-M Aerospace</p></div></div><div><div class="when">Oct to Dec 2025</div><div><h3>Aircraft Design Intern</h3><p>Skyline Space, remote</p></div></div><div><div class="when">2024 to 2025</div><div><h3>Flight Experimental Methods</h3><p>Cranfield University. Seven flight-test sessions and flight-dynamics experiments in roll, pitch and other manoeuvres, comparing measured response with predictions.</p></div></div><div><div class="when">Dec 2023 to Jul 2024</div><div><h3>Head of Infrastructure and Logistics</h3><p>SASTRA University. Led a team of 23 planning technical workshops and engineering events.</p></div></div><div><div class="when">Apr to Nov 2023</div><div><h3>Research Intern</h3><p>Indian Institute of Remote Sensing (ISRO). Engineering analysis of large aerospace datasets.</p></div></div><div><div class="when">May 2022 to Apr 2023</div><div><h3>Design and Chassis Engineer</h3><p>SASTRA Racing Team, E-Baja</p></div></div>
+    </div>
+  </section>
+
+  <section id="education" aria-labelledby="edu-h">
+    <div class="section-head"><h2 id="edu-h">Education</h2></div>
+    <div class="rows">
+      <div><div class="when">2024 to 2025</div><div><h3>MSc Aerospace Dynamics</h3><p>Cranfield University, UK. Thesis: high-fidelity CFD of leading-edge tubercles on propeller blades.</p></div></div><div><div class="when">2020 to 2024</div><div><h3>B.Tech Aerospace Engineering</h3><p>SASTRA University, India. First Class with Distinction.</p></div></div>
+      <div><div class="when">Certifications</div><div><p>Gold Rank for Innovation, Ministry of Heavy Industries (2024). ISRO Remote Sensing and Environmental Modelling (2023).</p></div></div><div><div class="when">Languages</div><div><p>English, Tamil, German, Italian, Hindi</p></div></div>
+    </div>
+  </section>
+
+  <section id="skills" aria-labelledby="skills-h">
+    <div class="section-head"><h2 id="skills-h">Skills</h2></div>
+    <div class="skills">
+      <div><div class="label">CAD and design</div><div class="chips"><span class="chip">CATIA V5/V6/3DX</span><span class="chip">SolidWorks</span><span class="chip">Fusion 360</span><span class="chip">AutoCAD</span></div></div><div><div class="label">Structural analysis</div><div class="chips"><span class="chip">ANSYS Mechanical</span><span class="chip">ANSYS Workbench</span><span class="chip">Static FEA</span><span class="chip">Modal FEA</span><span class="chip">Thermal FEA</span></div></div><div><div class="label">CFD</div><div class="chips"><span class="chip">ANSYS Fluent</span><span class="chip">OpenFOAM</span><span class="chip">XFLR5</span><span class="chip">XFOIL</span><span class="chip">Pointwise</span><span class="chip">ANSYS Gambit</span><span class="chip">Tecplot</span><span class="chip">SimScale</span></div></div><div><div class="label">Testing and validation</div><div class="chips"><span class="chip">Wind tunnel</span><span class="chip">Schlieren imaging</span><span class="chip">Pressure measurements</span><span class="chip">Flight testing</span></div></div><div><div class="label">Programming and computing</div><div class="chips"><span class="chip">Python</span><span class="chip">MATLAB</span><span class="chip">C++</span><span class="chip">Bash/Linux</span><span class="chip">HPC</span><span class="chip">LaTeX</span><span class="chip">Git</span></div></div><div><div class="label">Materials and manufacturing</div><div class="chips"><span class="chip">Carbon fibre</span><span class="chip">Aluminium</span><span class="chip">Titanium</span><span class="chip">Sandwich structures</span><span class="chip">Additive manufacturing</span><span class="chip">DFM</span></div></div>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-h">
+    <div class="section-head"><h2 id="contact-h">Contact</h2></div>
+    <div class="contact">
+      <div><span class="label">Email</span><span class="val">swethabalasubramanian02@gmail.com</span></div>
+      <div><span class="label">LinkedIn</span><span class="val"><a href="https://www.linkedin.com/in/swetha-bala02" target="_blank" rel="noopener">linkedin.com/in/swetha-bala02</a></span></div>
+      <div><span class="label">CV</span><span class="val">Available on request</span></div>
+    </div>
+  </section>
+</div>
+
+<div class="view proj" id="view-thesis" hidden><nav class="pn" aria-label="Project navigation"><span class="off">← Previous</span><a href="#home">All projects</a><a href="#crm">Next →</a></nav><header class="phead"><p class="meta">2024 to 2025</p><h1>Leading-edge tubercles on propeller blades</h1><div class="tags"><span class="tag">CFD</span><span class="tag">Aeroacoustics</span></div><p class="lede">High-fidelity CFD and aeroacoustics of a propeller with humpback-whale-inspired leading-edge tubercles, compared with a baseline blade at 0° and 8° pitch.</p></header><dl class="metablock"><div><dt>Where</dt><dd>Cranfield University, School of Aerospace, Transport and Manufacturing</dd></div><div><dt>When</dt><dd>Academic year 2024 to 2025, submitted September 2025</dd></div><div><dt>Supervisors</dt><dd>Dr Davide Di Pasquale and Dr Anderson Proenca</dd></div><div><dt>Tools</dt><dd>ANSYS Fluent, MATLAB, HPC</dd></div><div><dt>Skills</dt><dd>Unsteady CFD, DDES, Ffowcs Williams-Hawkings acoustics, turbulence modelling, validation</dd></div></dl><div class="stats"><div><div class="big">2.2%</div><div class="cap">more thrust at 8° pitch and maximum RPM</div></div><div><div class="big">about 2 dB</div><div class="cap">lower overall noise at the in-plane microphones at 8° pitch</div></div><div><div class="big">4</div><div class="cap">turbulence closures compared against experiment</div></div></div><h2>Problem</h2><p class="prose">Conventional propeller blades suffer from flow separation, limited efficiency and tonal noise. Humpback whale flippers carry leading-edge tubercles that create counter-rotating vortices and help keep flow attached. Most earlier work covered static wings and hydrofoils, so the effect on a rotating propeller was not well understood. This project used high-fidelity CFD to find out whether tubercles raise thrust and cut noise, and at which operating points.</p><figure class="fimg"><img src="img/thesis-cad.jpg" alt="Baseline propeller on the left and full-tubercle propeller on the right" width="1100" height="434" ><figcaption>Baseline propeller (left) and full-tubercle propeller (right).</figcaption></figure><h2>Method</h2><ul class="prose"><li>Chose the turbulence model first. Spalart-Allmaras, SST k-ω, RSM-ω and EARSM were compared against experimental thrust.</li><li>Checked mesh convergence with the grid convergence index and kept wall y+ below one, using 35 prism layers with a 0.002 mm first cell.</li><li>Validated thrust against RPM with wind-tunnel data.</li><li>Ran Delayed Detached Eddy Simulation on HPC for the baseline and tubercled propellers, then computed far-field noise with the Ffowcs Williams-Hawkings analogy and post-processed in MATLAB.</li></ul><div class="tbl"><p class="label">Simulation set-up</p><div class="tbl-wrap"><table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody><tr><td>Propeller</td><td>Three-bladed, up to 3000 RPM</td></tr><tr><td>Blade pitch</td><td>0° and 8°</td></tr><tr><td>Configurations</td><td>Baseline and full tubercle</td></tr><tr><td>Turbulence closures compared</td><td>Spalart-Allmaras, SST k-ω, RSM-ω, EARSM</td></tr><tr><td>Boundary layer mesh</td><td>35 prism layers, 0.002 mm first cell, y+ below 1</td></tr><tr><td>Acoustics</td><td>30 microphones on a ring of radius 3R, plus off-axis microphones</td></tr><tr><td>Blade-passing frequency</td><td>150 Hz at 3000 RPM (three blades)</td></tr></tbody></table></div></div><figure class="fimg"><img src="img/thesis-validation.jpg" alt="Line chart of thrust against RPM, CFD and experiment closely agreeing" width="967" height="764" ><figcaption>Validation: thrust against RPM, CFD and wind-tunnel experiment.</figcaption></figure><h2>Results: aerodynamics</h2><ul class="prose"><li>RSM-ω matched experimental thrust most closely because it treats turbulence anisotropy and swirl explicitly. SST k-ω gave a good accuracy-to-cost balance for parametric studies. EARSM tended to over-predict thrust, and RSM-ω and EARSM ran 2 to 3 times longer.</li><li>At 0° pitch both propellers produce negative thrust, and tubercles steepen the drop with RPM.</li><li>At 8° pitch tubercles gave up to 2.2% more thrust at maximum RPM (63.42 N at 3000 RPM), by delaying separation and energising the boundary layer.</li><li>Tip vortices weakened, but extra secondary vortices made the wake more complex. The net benefit depends on operating point and is stronger at higher blade loading.</li></ul><figure class="fimg"><img src="img/thesis-vorticity.jpg" alt="Three contour plots of axial vorticity behind the propeller" width="1100" height="308" ><figcaption>Axial vorticity just behind the propeller disk: baseline 0°, tubercled 0°, tubercled 8° pitch.</figcaption></figure><h2>Results: aeroacoustics</h2><ul class="prose"><li>At 0° pitch, overall sound pressure level at the in-plane microphones changed by less than 0.7 dB.</li><li>At 8° pitch, tubercles lowered it by about 2 dB and suppressed tones at the blade-passing frequency.</li><li>In the wake, tubercles cut noise by 3.6 dB at 0° but raised it by about 0.8 dB at 8°, because stronger mixing adds broadband noise. The acoustic benefit is directional and depends on the case.</li></ul>
+<section class="widget" aria-labelledby="w-oaspl-h">
+  <h3 id="w-oaspl-h">Overall noise explorer</h3>
+  <p class="wnote">Overall sound pressure level from Table 10.1 of the thesis. Pick a microphone and a blade pitch.</p>
+  <div class="wcontrols">
+    <div class="wgroup"><span class="label">Microphone</span>
+      <div class="seg" id="oaspl-mic" role="group" aria-label="Microphone">
+        <button type="button" data-v="6" aria-pressed="true">Mic 6</button>
+        <button type="button" data-v="8" aria-pressed="false">Mic 8</button>
+        <button type="button" data-v="18" aria-pressed="false">Mic 18</button>
+        <button type="button" data-v="28" aria-pressed="false">Mic 28</button>
+      </div>
+    </div>
+    <div class="wgroup"><span class="label">Blade pitch</span>
+      <div class="seg" id="oaspl-pitch" role="group" aria-label="Blade pitch">
+        <button type="button" data-v="0" aria-pressed="false">0°</button>
+        <button type="button" data-v="8" aria-pressed="true">8°</button>
+      </div>
+    </div>
+  </div>
+  <p class="wnote" id="oaspl-where"></p>
+  <div class="bars" aria-live="polite">
+    <div class="bar-row"><span class="label">Baseline</span><div class="bar"><div class="fill" id="oaspl-b-fill"></div></div><span class="val" id="oaspl-b-val"></span></div>
+    <div class="bar-row"><span class="label">Tubercled</span><div class="bar"><div class="fill" id="oaspl-t-fill"></div></div><span class="val" id="oaspl-t-val"></span></div>
+  </div>
+  <p class="delta" id="oaspl-delta" aria-live="polite"></p>
+  <p class="wnote">Bars run from 60 to 86 dB. Mic 6, 8 and 18 sit in the propeller plane. Mic 28 is in the wake.</p>
+</section><h2>Recommendations from the thesis</h2><ul class="prose"><li>Vary tubercle amplitude, wavelength, spacing and placement, and optimise for thrust against noise.</li><li>Use hybrid RANS-LES or full LES to resolve blade-wake interaction and far-field directivity.</li><li>Extend to higher Reynolds numbers and compressible flow to test how the benefit scales.</li><li>Study tubercled propellers installed with wings and in distributed propulsion layouts.</li><li>Validate in the wind tunnel with phased microphone arrays.</li></ul><nav class="pn" aria-label="Project navigation"><span class="off">← Previous</span><a href="#home">All projects</a><a href="#crm">Next →</a></nav></div><div class="view proj" id="view-crm" hidden><nav class="pn" aria-label="Project navigation"><a href="#thesis">← Previous</a><a href="#home">All projects</a><a href="#saccon">Next →</a></nav><header class="phead"><p class="meta">Mar 2025</p><h1>NASA CRM wing-body: transonic turbulence model assessment</h1><div class="tags"><span class="tag">CFD</span><span class="tag">Transonic</span><span class="tag">Turbulence modelling</span></div><p class="lede">Group study of transonic flow over the NASA Common Research Model wing-body, comparing five RANS turbulence models against wind-tunnel data. My model was EARSM.</p></header><dl class="metablock"><div><dt>Where</dt><dd>Cranfield University, group project (CFD for Aerospace)</dd></div><div><dt>When</dt><dd>Submitted March 2025, group of five</dd></div><div><dt>My part</dt><dd>Assessed the EARSM model, and shared the Fluent meshes, the grid convergence study and the solver set-up with teammates (about 30% each). Wrote most of the introduction.</dd></div><div><dt>Tools</dt><dd>ANSYS Fluent on the Cranfield CRESCENT2 HPC cluster</dd></div><div><dt>Skills</dt><dd>Transonic CFD, hybrid meshing, grid convergence index, turbulence model assessment</dd></div></dl><div class="stats"><div><div class="big">Mach 0.85</div><div class="cap">Reynolds number 5 million, 0°, 2.5° and 4° angle of attack</div></div><div><div class="big">7.8M to 23.9M</div><div class="cap">cells across three meshes</div></div><div><div class="big">+12 to 14%</div><div class="cap">EARSM CL against wind tunnel</div></div><div><div class="big">+29 to 36%</div><div class="cap">EARSM CD against wind tunnel</div></div></div><h2>Problem</h2><p class="prose">How well do RANS turbulence models predict transonic flow over the NASA Common Research Model wing-body? The group compared k-ε, GEKO, EARSM, SST k-ω and Spalart-Allmaras at Mach 0.85 and a Reynolds number of 5 million, at 0°, 2.5° and 4° angle of attack, against wind-tunnel data.</p><h2>Method</h2><ul class="prose"><li>Two families of three hybrid meshes (ANSYS Fluent and Pointwise) of 7.8M, 11.9M and 23.9M cells, with boundary layers resolved to y+ near 1.</li><li>Density-based implicit RANS in ANSYS Fluent on the Cranfield CRESCENT2 HPC cluster.</li><li>Grid convergence index with Richardson extrapolation: observed order 2.81 for CL and 3.04 for CD, giving CL 0.4944 and CD 0.02464 at zero spacing.</li><li>Compared lift, drag and spanwise surface pressure with wind tunnel at 20%, 50% and 85% of the span, and looked at Mach contours to follow the shock.</li></ul><figure class="fimg"><img src="img/crm-mesh-junction.jpg" alt="Surface mesh at the wing-body junction" width="624" height="402" ><figcaption>Surface mesh at the wing-body junction.</figcaption></figure><h2>Results</h2><ul class="prose"><li>EARSM over-predicted lift by 12 to 14% and drag by 29 to 36% against the wind tunnel, but followed the experimental pressure trends across the span.</li><li>At 4° angle of attack a separation bubble forms at the wing-body junction, and EARSM struggled to capture it.</li><li>For the group as a whole, SST k-ω was the most accurate on lift and drag.</li></ul><div class="tbl"><p class="label">EARSM against wind tunnel, from the report</p><div class="tbl-wrap"><table><thead><tr><th>AoA</th><th>CL CFD</th><th>CL exp.</th><th>CD CFD</th><th>CD exp.</th><th>CL/CD CFD</th></tr></thead><tbody><tr><td>0.0</td><td>0.1999</td><td>0.1763</td><td>0.0172</td><td>0.0131</td><td>11.62</td></tr><tr><td>2.5</td><td>0.5594</td><td>0.4976</td><td>0.0290</td><td>0.0224</td><td>19.29</td></tr><tr><td>4.0</td><td>0.7272</td><td>0.6355</td><td>0.0519</td><td>0.0381</td><td>14.01</td></tr></tbody></table></div></div><figure class="fimg"><img src="img/crm-coeffs.jpg" alt="Charts of lift and drag coefficient against angle of attack, EARSM and wind tunnel" width="1540" height="594" ><figcaption>Lift and drag coefficient against angle of attack, EARSM (CFD) and wind tunnel, plotted from the report table.</figcaption></figure><figure class="fimg"><img src="img/crm-cp-wing-all.jpg" alt="Surface pressure coefficient on the wing at 0, 2.5 and 4 degrees" width="1100" height="409" ><figcaption>Surface Cp on the wing at 0°, 2.5° and 4° angle of attack.</figcaption></figure><figure class="fimg"><img src="img/crm-cp-eta50.jpg" alt="Cp against chord at 50 percent span, CFD and experiment" width="624" height="484" ><figcaption>Cp against chordwise position at 50% span, 4°: CFD against experiment.</figcaption></figure><figure class="fimg"><img src="img/crm-mach-eta50.jpg" alt="Mach number contours at 50 percent span" width="624" height="560" ><figcaption>Mach number contours at 50% span, 4°.</figcaption></figure><figure class="fimg"><img src="img/crm-separation.jpg" alt="Separation bubble at the wing-body junction" width="784" height="698" ><figcaption>Separation bubble at the wing-body junction, 4°.</figcaption></figure><nav class="pn" aria-label="Project navigation"><a href="#thesis">← Previous</a><a href="#home">All projects</a><a href="#saccon">Next →</a></nav></div><div class="view proj" id="view-saccon" hidden><nav class="pn" aria-label="Project navigation"><a href="#crm">← Previous</a><a href="#home">All projects</a><a href="#naca0020">Next →</a></nav><header class="phead"><p class="meta">Final-year project</p><h1>SACCON UCAV flying wing: stability and spoilers</h1><div class="tags"><span class="tag">CFD</span><span class="tag">Stability</span><span class="tag">Design</span></div><p class="lede">CFD and stability study of the SACCON tailless UCAV flying wing, with spoilers tested for roll and yaw control.</p></header><dl class="metablock"><div><dt>Where</dt><dd>SASTRA University, final-year project (ASE400)</dd></div><div><dt>Team</dt><dd>Team of two</dd></div><div><dt>Guide</dt><dd>Dr Ramprasadh C</dd></div><div><dt>Tools</dt><dd>SolidWorks 2022, ANSYS Fluent</dd></div><div><dt>Skills</dt><dd>CFD, grid independence, stability analysis, control surface design</dd></div></dl><div class="stats"><div><div class="big">53°</div><div class="cap">swept lambda planform, 5° twist</div></div><div><div class="big">1.1%</div><div class="cap">medium mesh against fine mesh</div></div><div><div class="big">1.13 million</div><div class="cap">Reynolds number at Mach 0.15</div></div><div><div class="big">-5° to 15°</div><div class="cap">sideslip range, over -2° to 12° angle of attack</div></div></div><h2>Problem</h2><p class="prose">Tailless flying wings are efficient but hard to stabilise. Inspired by the indigenous stealth UCAV Ghatak being developed by ADE, the project asked how a SACCON-type wing behaves in pitch, roll and yaw, and whether spoilers could add roll and yaw control.</p><figure class="fimg"><img src="img/saccon-spoilers-model.jpg" alt="SolidWorks model of the flying wing with spoilers on both wings" width="1000" height="626" ><figcaption>Flying wing model in SolidWorks with spoilers on both wings.</figcaption></figure><h2>Method</h2><ul class="prose"><li>Modelled the 53° swept SACCON wing with 5° twist in SolidWorks 2022.</li><li>Grid independence on three meshes (coarse, medium, fine). The medium mesh was within 1.1% of the fine mesh.</li><li>ANSYS Fluent at 1,000 m, 50 m/s (Mach 0.15, Reynolds number 1.13 million). Pitching moment was validated against published SACCON data.</li><li>Swept sideslip from -5° to 15° and angle of attack from -2° to 12°.</li><li>Designed spoilers and tested right-side, left-side and both-side deflection.</li></ul><figure class="fimg"><img src="img/saccon-mesh-fine.jpg" alt="Fine mesh around the wing" width="1100" height="607" ><figcaption>Fine mesh around the wing.</figcaption></figure><figure class="fimg"><img src="img/saccon-validation-cm.jpg" alt="Pitching moment coefficient against angle of attack" width="1100" height="679" ><figcaption>Validation: pitching moment against angle of attack.</figcaption></figure><h2>Results: stability</h2><ul class="prose"><li>L/D falls as sideslip grows, because drag rises faster than lift.</li><li>The wing is unstable in pitch, with a dip in pitching moment near 10° angle of attack that links to a change in the vortex pattern over the wing.</li><li>The rolling and yawing moment slopes against sideslip show no lateral or directional stability.</li></ul><figure class="fimg"><img src="img/saccon-ld.jpg" alt="CL over CD against angle of attack for three sideslip angles" width="922" height="570" ><figcaption>CL/CD against angle of attack at sideslip of -5°, 5° and 15°.</figcaption></figure><figure class="fimg"><img src="img/saccon-cm-dip.jpg" alt="Pitching moment against angle of attack for five sideslip angles" width="1100" height="680" ><figcaption>Pitching moment against angle of attack at five sideslip angles, showing the dip near 10°.</figcaption></figure><figure class="fimg"><img src="img/saccon-stability.jpg" alt="Rolling moment and yawing moment against sideslip" width="2212" height="680" ><figcaption>Rolling moment (left) and yawing moment (right) against sideslip.</figcaption></figure><figure class="fimg"><img src="img/saccon-stream-pair.jpg" alt="Streamlines over the wing without and with spoilers" width="1426" height="404" ><figcaption>Streamlines over the wing without spoilers (left) and with spoilers (right).</figcaption></figure><h2>Results: spoilers</h2><ul class="prose"><li>Deflecting spoilers on either or both wings changed the rolling and yawing moments, but they did not restore stability.</li><li>The report recommends further optimisation of the spoilers.</li></ul><figure class="fimg"><img src="img/saccon-spoiler-roll.jpg" alt="Rolling moment against sideslip for right, left and both-side spoilers" width="840" height="519" ><figcaption>Rolling moment against sideslip with right, left and both-side spoilers deflected.</figcaption></figure><figure class="fimg"><img src="img/saccon-spoiler-yaw.jpg" alt="Yawing moment against sideslip for right, left and both-side spoilers" width="745" height="460" ><figcaption>Yawing moment against sideslip with right, left and both-side spoilers deflected.</figcaption></figure><nav class="pn" aria-label="Project navigation"><a href="#crm">← Previous</a><a href="#home">All projects</a><a href="#naca0020">Next →</a></nav></div><div class="view proj" id="view-naca0020" hidden><nav class="pn" aria-label="Project navigation"><a href="#saccon">← Previous</a><a href="#home">All projects</a><a href="#transonic">Next →</a></nav><header class="phead"><p class="meta">May 2023</p><h1>NACA 0020 wing with a trailing-edge end plate</h1><div class="tags"><span class="tag">CFD</span><span class="tag">Flow separation</span></div><p class="lede">Steady CFD of a NACA 0020 wing with an extended end plate and an owl-inspired serrated edge, validated against wind-tunnel lift.</p></header><dl class="metablock"><div><dt>Where</dt><dd>SASTRA University, mini project (ASE300)</dd></div><div><dt>When</dt><dd>May 2023, team of three</dd></div><div><dt>Guide</dt><dd>Shri Manikandan K</dd></div><div><dt>My part</dt><dd>Literature survey, SolidWorks models, the structured mesh in ANSYS Gambit, Fluent runs, the grid independence test, Tecplot post-processing, the report and the presentation.</dd></div><div><dt>Tools</dt><dd>SolidWorks, ANSYS Gambit, ANSYS Fluent, Tecplot</dd></div><div><dt>Skills</dt><dd>Structured meshing, RANS CFD, validation, flow separation analysis</dd></div></dl><div class="stats"><div><div class="big">over 60%</div><div class="cap">higher maximum lift with the end plate</div></div><div><div class="big">2.42%</div><div class="cap">average lift deviation from wind tunnel</div></div><div><div class="big">550,000</div><div class="cap">elements at grid independence</div></div><div><div class="big">10°</div><div class="cap">stall angle of the base wing</div></div></div><h2>Problem</h2><p class="prose">A sharp trailing edge loses lift and gains drag soon after stall. Can an extended end plate (0.3c), or an owl-inspired serrated edge, delay separation on a NACA 0020 wing at a Reynolds number of 600,000, from 0° to 20° angle of attack?</p><figure class="fimg"><img src="img/naca-geometry.jpg" alt="Base wing, extended end plate and serrated edge models" width="1100" height="436" ><figcaption>Base wing (chord 10 cm, span 30 cm), extended end plate (0.3c) and serrated edge (amplitude 0.3c, wavelength 6 cm).</figcaption></figure><h2>Method</h2><ul class="prose"><li>Modelled the wings in SolidWorks.</li><li>Structured C-H mesh in ANSYS Gambit with a refined near-wall layer.</li><li>Steady SST k-ω in ANSYS Fluent at 30 m/s.</li><li>Grid independence settled at about 550,000 elements. The base wing was validated against wind-tunnel lift before the end plate was added.</li><li>Separation and wake growth examined with Tecplot pressure and velocity contours and streamlines.</li></ul><figure class="fimg"><img src="img/naca-domain-mesh.jpg" alt="Computational domain and structured mesh" width="1100" height="409" ><figcaption>Computational domain and structured C-H mesh.</figcaption></figure><figure class="fimg"><img src="img/naca-validation.jpg" alt="Lift coefficient against angle of attack, CFD and reference" width="1030" height="640" ><figcaption>Validation: lift coefficient against angle of attack, CFD and wind-tunnel reference.</figcaption></figure><h2>Results</h2><ul class="prose"><li>Lift matched the wind tunnel to an average deviation of 2.42%.</li><li>The base wing stalls at 10° with CL about 1.46. Separation starts at the trailing edge and has reached the leading edge by 20°.</li><li>The end plate raised maximum CL to about 2.4, over 60% higher, with similar drag to 10° and more beyond it.</li></ul><figure class="fimg"><img src="img/naca-cl-compare.jpg" alt="Lift coefficient, base wing against extended end plate" width="900" height="610" ><figcaption>Lift coefficient: base wing against extended end plate.</figcaption></figure><figure class="fimg"><img src="img/naca-cd-compare.jpg" alt="Drag coefficient, base wing against extended end plate" width="900" height="550" ><figcaption>Drag coefficient: base wing against extended end plate.</figcaption></figure><figure class="fimg"><img src="img/naca-stream-pair.jpg" alt="Streamlines at increasing angle of attack for the base wing and the end plate wing" width="1100" height="1297" ><figcaption>Streamlines from 0° to 20° angle of attack: base wing and extended end plate.</figcaption></figure><figure class="fimg"><img src="img/naca-vel-base-stall.jpg" alt="Velocity contours on the base wing near stall" width="1100" height="835" ><figcaption>Velocity contours on the base wing near and after stall.</figcaption></figure><figure class="fimg"><img src="img/naca-vel-endplate-stall.jpg" alt="Velocity contours on the end plate wing near stall" width="1100" height="841" ><figcaption>Velocity contours on the end plate wing at the same angles.</figcaption></figure><nav class="pn" aria-label="Project navigation"><a href="#saccon">← Previous</a><a href="#home">All projects</a><a href="#transonic">Next →</a></nav></div><div class="view proj" id="view-transonic" hidden><nav class="pn" aria-label="Project navigation"><a href="#naca0020">← Previous</a><a href="#home">All projects</a><a href="#reynolds">Next →</a></nav><header class="phead"><p class="meta">Feb to Apr 2025</p><h1>3D transonic wing design</h1><div class="tags"><span class="tag">Aerodynamic design</span></div><p class="lede">Design of a three-dimensional transonic wing for Mach 0.8, built from three aerofoils and tuned for lift, wave drag and buffet margin.</p></header><dl class="metablock"><div><dt>Where</dt><dd>Cranfield University, transonic wing design course</dd></div><div><dt>When</dt><dd>February to April 2025</dd></div><div><dt>Supervisor</dt><dd>Dr Davide Di Pasquale</dd></div><div><dt>Tools</dt><dd>ESDU VGKD, VGK and VFP; XFOIL</dd></div><div><dt>Skills</dt><dd>Transonic aerodynamics, aerofoil selection, wing planform optimisation</dd></div></dl><div class="stats"><div><div class="big">+8.95%</div><div class="cap">lift at the design point</div></div><div><div class="big">+7.43%</div><div class="cap">drag at the design point</div></div><div><div class="big">1.42%</div><div class="cap">gain in ML/D over the baseline wing</div></div><div><div class="big">12% to 11%</div><div class="cap">thickness-to-chord ratio</div></div></div><h2>Problem</h2><p class="prose">Design a complete three-dimensional wing for transonic flight at Mach 0.8 and 2° angle of attack, and improve on a baseline wing.</p><h2>Method</h2><ul class="prose"><li>Analysed 2D aerofoils with XFOIL, then used VGKD (inverse design) and VGK (viscous analysis) to build a database of optimised aerofoils ranked by Korn technology factor, buffet margin, CL/CD and thickness-to-chord ratio.</li><li>Combined Lockheed C-5A, NPL 9510 and SC0412 sections at the root, mid-span and tip.</li><li>Assessed each 3D wing with VFP while varying twist, dihedral, taper ratio and tip chord, and checked spanwise loading and pressure distribution to reduce wave drag.</li></ul><h2>Results</h2><ul class="prose"><li>At the design point (Mach 0.8, 2° angle of attack) lift rose 8.95% against a 7.43% rise in drag, a 1.42% gain in ML/D over the baseline wing.</li><li>Reducing tip twist raised buffet margin. Increasing root twist raised lift at a cost in buffet margin.</li><li>Overall buffet margin was about 7% lower, with better margin in angle of attack and CL at matched CL. Thickness fell from 12% to 11%, which suits the wing to smaller aircraft.</li></ul><figure class="fimg"><img src="img/buffet-margin.jpg" alt="Chart of lift coefficient against Mach number for two wings with design points marked" width="554" height="378" ><figcaption>Buffet boundary, lift coefficient against Mach number. LNS is the final wing configuration; the provided wing is the reference. Design points (DP) marked.</figcaption></figure><nav class="pn" aria-label="Project navigation"><a href="#naca0020">← Previous</a><a href="#home">All projects</a><a href="#reynolds">Next →</a></nav></div><div class="view proj" id="view-reynolds" hidden><nav class="pn" aria-label="Project navigation"><a href="#transonic">← Previous</a><a href="#home">All projects</a><span class="off">Next →</span></nav><header class="phead"><p class="meta">Oct 2025</p><h1>Reynolds numbers at cruise</h1><div class="tags"><span class="tag">Aerodynamics</span></div><p class="lede">An intermediate task report for Skyline Space calculating Reynolds numbers for three aircraft at their cruise conditions, with a calculator built from the same data.</p></header><dl class="metablock"><div><dt>Where</dt><dd>Skyline Space, aircraft design technology</dd></div><div><dt>When</dt><dd>Report dated 28 October 2025</dd></div><div><dt>Tools</dt><dd>ISA tables, hand calculation</dd></div><div><dt>Skills</dt><dd>Flight conditions, dimensional analysis, technical reporting</dd></div></dl><div class="stats"><div><div class="big">4.26 × 10⁸</div><div class="cap">Boeing 787-9</div></div><div><div class="big">1.29 × 10⁸</div><div class="cap">F-22 Raptor</div></div><div><div class="big">3.42 × 10⁷</div><div class="cap">MQ-9 Reaper</div></div></div><h2>Problem</h2><p class="prose">Calculate the Reynolds number of a passenger aircraft, a fighter and a UAV at their cruise conditions, using each aircraft&#x27;s length as the reference length.</p><h2>Method</h2><p class="prose">Density and dynamic viscosity came from the ISA table at each cruise altitude. Reynolds number is Re = ρVL/μ, where ρ is density, V is speed, L is length and μ is dynamic viscosity.</p><div class="tbl"><p class="label">Cruise conditions from the ISA table</p><div class="tbl-wrap"><table><thead><tr><th>Aircraft</th><th>Altitude (ft)</th><th>ρ (kg/m³)</th><th>V (m/s)</th><th>L (m)</th><th>μ (Pa s)</th><th>Re</th></tr></thead><tbody><tr><td>Boeing 787-9</td><td>35,000</td><td>0.38</td><td>255.50</td><td>62.80</td><td>1.43e-5</td><td>4.26 × 10⁸</td></tr><tr><td>F-22 Raptor</td><td>50,000</td><td>0.187</td><td>519.44</td><td>18.92</td><td>1.42e-5</td><td>1.29 × 10⁸</td></tr><tr><td>MQ-9 Reaper</td><td>25,000</td><td>0.55</td><td>86.94</td><td>11.00</td><td>1.539e-5</td><td>3.42 × 10⁷</td></tr></tbody></table></div></div>
+<section class="widget" aria-labelledby="w-re-h">
+  <h3 id="w-re-h">Reynolds number calculator</h3>
+  <p class="wnote">Start from one of the three cruise cases, or type your own values.</p>
+  <div class="wcontrols">
+    <div class="wgroup"><span class="label">Preset</span>
+      <div class="seg" id="re-preset" role="group" aria-label="Preset aircraft">
+        <button type="button" data-v="0" aria-pressed="true">Boeing 787-9</button>
+        <button type="button" data-v="1" aria-pressed="false">F-22 Raptor</button>
+        <button type="button" data-v="2" aria-pressed="false">MQ-9 Reaper</button>
+      </div>
+    </div>
+  </div>
+  <div class="inputs">
+    <label for="re-rho"><span class="label">Density ρ (kg/m³)</span><input id="re-rho" type="text" inputmode="decimal" autocomplete="off"></label>
+    <label for="re-v"><span class="label">Speed V (m/s)</span><input id="re-v" type="text" inputmode="decimal" autocomplete="off"></label>
+    <label for="re-l"><span class="label">Length L (m)</span><input id="re-l" type="text" inputmode="decimal" autocomplete="off"></label>
+    <label for="re-mu"><span class="label">Viscosity μ (Pa s)</span><input id="re-mu" type="text" inputmode="decimal" autocomplete="off"></label>
+  </div>
+  <p class="delta" id="re-out" aria-live="polite"></p>
+  <p class="wnote">Re = ρ V L / μ. Viscosity accepts forms like 1.43e-5.</p>
+</section><h2>Results</h2><p class="prose">The 787-9 has the highest Reynolds number even though the F-22 flies about twice as fast, because the 787-9 is more than three times longer.</p><nav class="pn" aria-label="Project navigation"><a href="#transonic">← Previous</a><a href="#home">All projects</a><span class="off">Next →</span></nav></div>
+</main>
+<div class="foot"><span>Made with ♥ and a lot of CFD</span><span>Milton Keynes, UK</span><span>Oct 2026</span></div>
+
+<script>
+(function () {
+  var views = document.querySelectorAll('.view');
+  function show() {
+    var h = (location.hash || '').replace('#', '');
+    var target = h ? document.getElementById('view-' + h) : null;
+    var home = document.getElementById('view-home');
+    for (var i = 0; i < views.length; i++) {
+      views[i].hidden = target ? views[i] !== target : views[i] !== home;
+    }
+    if (target) { window.scrollTo(0, 0); return; }
+    var el = h && h !== 'home' ? document.getElementById(h) : null;
+    if (el) { el.scrollIntoView(); } else { window.scrollTo(0, 0); }
+  }
+  window.addEventListener('hashchange', show);
+  show();
+
+  function seg(id, onPick) {
+    var box = document.getElementById(id);
+    if (!box) return;
+    var btns = box.querySelectorAll('button');
+    function pick(v) {
+      for (var i = 0; i < btns.length; i++) btns[i].setAttribute('aria-pressed', btns[i].getAttribute('data-v') === v ? 'true' : 'false');
+    }
+    box.addEventListener('click', function (ev) {
+      var b = ev.target.closest('button');
+      if (!b) return;
+      pick(b.getAttribute('data-v'));
+      onPick(b.getAttribute('data-v'));
+    });
+    return { get: function () { for (var i = 0; i < btns.length; i++) if (btns[i].getAttribute('aria-pressed') === 'true') return btns[i].getAttribute('data-v'); }, pick: pick };
+  }
+
+  /* Overall noise explorer: thesis Table 10.1, order baseline 0, tubercled 0, baseline 8, tubercled 8 */
+  var OASPL = { '6': [82.4412, 82.6489, 83.8, 81.92], '8': [82.7598, 82.9, 83.962, 81.94], '18': [82.2985, 82.9775, 83.873, 81.8], '28': [67.6839, 64.1, 62.6724, 63.42] };
+  var mic, pitch;
+  function drawOaspl() {
+    if (!mic) return;
+    var m = mic.get(), p = pitch.get();
+    var d = OASPL[m], b = p === '0' ? d[0] : d[2], t = p === '0' ? d[1] : d[3];
+    var pct = function (v) { return Math.max(0, Math.min(100, (v - 60) / 26 * 100)) + '%'; };
+    document.getElementById('oaspl-b-fill').style.width = pct(b);
+    document.getElementById('oaspl-t-fill').style.width = pct(t);
+    document.getElementById('oaspl-b-val').textContent = b.toFixed(2) + ' dB';
+    document.getElementById('oaspl-t-val').textContent = t.toFixed(2) + ' dB';
+    document.getElementById('oaspl-where').textContent = (m === '28' ? 'Wake microphone, downstream of the propeller' : 'In-plane microphone, level with the propeller disk') + ', ' + p + '° pitch.';
+    var diff = t - b, out = document.getElementById('oaspl-delta');
+    var word = diff < 0 ? 'lower' : 'higher';
+    out.textContent = 'Tubercles: ' + Math.abs(diff).toFixed(2) + ' dB ' + word + ' than baseline';
+    out.className = 'delta ' + (diff < 0 ? 'down' : 'up');
+  }
+  mic = seg('oaspl-mic', drawOaspl);
+  pitch = seg('oaspl-pitch', drawOaspl);
+  drawOaspl();
+
+  /* Reynolds number calculator: cruise cases from the Skyline Space report */
+  var CASES = [[0.38, 255.5, 62.8, '1.43e-5'], [0.187, 519.44, 18.92, '1.42e-5'], [0.55, 86.94, 11.0, '1.539e-5']];
+  var ids = ['re-rho', 're-v', 're-l', 're-mu'];
+  var SUP = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹', '-': '⁻' };
+  function sup(n) { return String(n).split('').map(function (c) { return SUP[c] || c; }).join(''); }
+  function calc() {
+    var out = document.getElementById('re-out');
+    if (!out) return;
+    var v = ids.map(function (i) { return parseFloat(document.getElementById(i).value); });
+    if (v.some(function (x) { return !isFinite(x) || x <= 0; })) { out.textContent = 'Enter four positive numbers'; out.className = 'delta up'; return; }
+    var re = v[0] * v[1] * v[2] / v[3];
+    var ex = Math.floor(Math.log10(re)), man = re / Math.pow(10, ex);
+    if (man.toFixed(2) === '10.00') { man = 1; ex += 1; }
+    out.textContent = 'Re = ' + man.toFixed(2) + ' × 10' + sup(ex);
+    out.className = 'delta down';
+  }
+  var preset = seg('re-preset', function (k) {
+    var c = CASES[+k];
+    for (var i = 0; i < 4; i++) document.getElementById(ids[i]).value = c[i];
+    calc();
+  });
+  if (preset) {
+    var c0 = CASES[0];
+    for (var j = 0; j < 4; j++) document.getElementById(ids[j]).value = c0[j];
+    ids.forEach(function (i) {
+      document.getElementById(i).addEventListener('input', function () { preset.pick('-1'); calc(); });
+    });
+    calc();
+  }
+
+  var cb = document.getElementById('copy-email');
+  if (cb) cb.addEventListener('click', function () {
+    var el = document.getElementById('email-text');
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(el);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      cb.textContent = 'Selected, press copy';
+    }
+    try {
+      navigator.clipboard.writeText(el.textContent).then(function () { cb.textContent = 'Copied'; }, fallback);
+    } catch (err) { fallback(); }
+    setTimeout(function () { cb.textContent = 'Copy email'; }, 2500);
+  });
+})();
+</script>
+</body>
+</html>
